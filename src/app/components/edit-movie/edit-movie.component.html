@@ -1,0 +1,51 @@
+<form class="row" [formGroup]="movie" style="margin: 10px;">
+  <div class="col-sm-6">
+    <div [ngClass]="{'form-group': true, 'has-danger': movie.controls.title.status === 'INVALID' && movie.controls.title.touched}">
+      <label class="form-control-label" for="title">Title</label>
+      <input class="form-control" id="title" name="title" type="text" formControlName="title" required minlength="4">
+      <div *ngIf="movie.controls.title.status === 'INVALID' && movie.controls.title.touched">
+        <div class="text-danger" *ngIf="movie.controls.title.errors.required">Title is required!
+        </div>
+        <div class="text-danger" *ngIf="movie.controls.title.errors.minlength">
+          Title must be at least 4 characters long.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-control-label" for="release-date">Release Date</label>
+      <input class="form-control" id="release-date" name="release-date" type="date" formControlName="releaseDate">
+    </div>
+    <div class="form-group" [ngClass]="{'form-group': true, 'has-danger': movie.controls.description.status === 'INVALID' && movie.controls.description.touched}">
+      <label class="form-control-label" for="description">Description</label>
+      <textarea class="form-control" id="description" name="description" rows="3" formControlName="description" minlength="10">
+    </textarea>
+    <div *ngIf="movie.controls.description.status === 'INVALID' && movie.controls.description.touched">
+      <div class="text-danger" *ngIf="movie.controls.description.errors.required">Description is required!
+      </div>
+      <div class="text-danger" *ngIf="movie.controls.description.errors.minlength">
+        Description must be at least 10 characters long.
+      </div>
+    </div>
+    </div>
+    <label>Actors</label>
+    <ul class="list-group" *ngIf="movie.get('actors').value.length > 0">
+      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let actor of movie.get('actors').value; let i = index;">
+        {{actor.firstName + " " + actor.lastName}}
+        <span class="badge badge-pill badge-primary" style="cursor: pointer;" (click)="removeActor(i)">Remove</span>
+      </li>
+    </ul>
+    <button class="btn btn-outline-primary btn-block" (click)="onSubmit()" [disabled]="movie.invalid">Submit</button>
+    <button class="btn btn-outline-default btn-block" (click)="onReset()">Reset</button>
+  </div>
+  <div class="col-sm-6">
+    <label>All actors list
+      <a style="margin-left: 200px;" routerLink="/new-actor">Create new actor</a>
+    </label>
+    <ul class="list-group" *ngIf="actors.length > 0">
+      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let actor of actors; let i = index;">
+        {{actor.firstName + " " + actor.lastName}}
+        <span class="badge badge-pill badge-primary" style="cursor: pointer;" (click)="addActor(i)">Add</span>
+      </li>
+    </ul>
+  </div>
+</form>

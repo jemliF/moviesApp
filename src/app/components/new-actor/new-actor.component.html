@@ -1,0 +1,36 @@
+<form class="row" style="margin: 10px;">
+  <div class="col-sm-6">
+    <div [ngClass]="{'form-group': true, 'has-danger': firstname.invalid 
+                && (firstname.dirty || firstname.touched)}">
+      <label class="form-control-label" for="firstname">First name</label>
+      <input class="form-control" id="firstname" name="firstname" type="text" [(ngModel)]="newActor.firstName" required minlength="3" #firstname="ngModel">
+      <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)">
+        <div class="text-danger" *ngIf="firstname.errors.required">First name is required!
+        </div>
+        <div class="text-danger" *ngIf="firstname.errors.minlength">
+          First name must be at least 3 characters long.
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="{'form-group': true, 'has-danger': lastname.invalid && (lastname.dirty || lastname.touched)}">
+      <label class="form-control-label" for="lastname">Last name</label>
+      <input class="form-control" id="lastname" name="lastname" type="text" [(ngModel)]="newActor.lastName" required minlength="3" #lastname="ngModel">
+      <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+        <div class="text-danger" *ngIf="lastname.errors.required">Last name is required!
+        </div>
+        <div class="text-danger" *ngIf="lastname.errors.minlength">
+          Last name must be at least 3 characters long.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="form-control-label" for="bio">Bio</label>
+      <textarea class="form-control" id="bio" name="bio" rows="3" [(ngModel)]="newActor.bio">
+    </textarea>
+    </div>
+    <button class="btn btn-outline-primary btn-block pull-right" (click)="onSubmit()" [disabled]="lastname.invalid || firstname.invalid">Submit</button>
+    <button class="btn btn-outline-default btn-block" (click)="onReset()">Reset</button>
+  </div>
+</form>

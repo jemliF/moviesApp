@@ -1,0 +1,20 @@
+<div class="card mb-3">
+  <h3 class="card-header">{{movie.title}}</h3>
+  <div class="card-body">
+    <blockquote class="blockquote text-center">
+      {{movie.description}}
+    </blockquote>
+    <!--<h6 class="card-subtitle text-muted"></h6>-->
+  </div>
+  <div class="card-body">
+    <a [routerLink]="['/edit-movie', movie._id]" class="card-link text-success">Edit</a>
+    <a href="#" class="card-link text-danger" (click)="onDelete()">Delete</a>
+  </div>
+  <div class="card-footer text-muted">
+    {{movie.releaseDate | date: 'medium'}}
+  </div>
+  <ul class="list-group list-group-flush" *ngIf="movie.actors">
+    <li class="list-group-item active">Actors</li>
+    <li class="list-group-item" *ngFor="let actor of movie.actors">{{actor.firstName + " " + actor.lastName}}</li>
+  </ul>
+</div>

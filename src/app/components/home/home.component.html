@@ -1,0 +1,4 @@
+<div class="row" *ngIf="movies.length > 0">
+  <app-movie-card *ngFor="let movie of movies" 
+  class="col-sm-4" [movie]="movie" (delete)="supprimer($event)"></app-movie-card>
+</div>
