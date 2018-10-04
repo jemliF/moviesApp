@@ -5,7 +5,7 @@ import { Actor } from '../interfaces/Actor';
 
 @Injectable()
 export class ActorService {
-  URL = 'api/v1/actors';
+  URL = 'http://localhost:5000/api/v1/actors';
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {

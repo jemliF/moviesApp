@@ -5,7 +5,7 @@ import { Movie } from '../interfaces/Movie';
 
 @Injectable()
 export class MovieService {
-  URL = 'api/v1/movies';
+  URL = 'http://localhost:5000/api/v1/movies';
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
